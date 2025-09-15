@@ -12,8 +12,8 @@ can cause errors with matching props and state in child components if the list o
 */
 import type { Database } from "@/lib/schema";
 import Image from "next/image";
-import LearnMoreDialog from "./learn-more-dialog";
 import EditSpeciesDialog from "./edit-dialog";
+import LearnMoreDialog from "./learn-more-dialog";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
@@ -29,7 +29,7 @@ export default function SpeciesCard({ session, species }: { session: string; spe
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
       <LearnMoreDialog species={species}></LearnMoreDialog>
-      {species.author == session && <EditSpeciesDialog userId = {session} species={species}></EditSpeciesDialog>}
+      {species.author == session && <EditSpeciesDialog userId={session} species={species}></EditSpeciesDialog>}
     </div>
   );
 }

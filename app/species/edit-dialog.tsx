@@ -16,12 +16,12 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
+import type { Database } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import type { Database } from "@/lib/schema";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
@@ -83,8 +83,9 @@ export default function EditSpeciesDialog({ userId, species }: { userId: string;
   const onSubmit = async (input: FormData) => {
     // The `input` prop contains data that has already been processed by zod. We can now use it in a supabase query
     const supabase = createBrowserSupabaseClient();
-    const { error } = await supabase.from("species").update(
-      {
+    const { error } = await supabase
+      .from("species")
+      .update({
         author: userId,
         common_name: input.common_name,
         description: input.description,
@@ -92,8 +93,8 @@ export default function EditSpeciesDialog({ userId, species }: { userId: string;
         scientific_name: input.scientific_name,
         total_population: input.total_population,
         image: input.image,
-      },
-    ).eq("id", species.id);
+      })
+      .eq("id", species.id);
 
     // Catch and report errors from Supabase and exit the onSubmit function with an early 'return' if an error occurred.
     if (error) {
