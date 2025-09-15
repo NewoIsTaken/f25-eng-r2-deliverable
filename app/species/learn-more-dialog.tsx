@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import Image from "next/image";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
