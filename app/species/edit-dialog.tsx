@@ -114,7 +114,7 @@ export default function EditSpeciesDialog({ userId, species }: { userId: string;
     router.refresh();
 
     return toast({
-      title: "New species added!",
+      title: "Species Edited!",
       description: "Successfully edited " + input.scientific_name + ".",
     });
   };
