@@ -28,7 +28,7 @@ export default function AnimalSpeedGraph() {
       const formattedData = rawData.map((animal) => ({
         name: animal.Animal,
         diet: animal.Diet,
-        speed: parseFloat(animal["Average Speed (km/h)"]),
+        speed: parseFloat(animal["Average Speed (km/h)"] || ""),
       }));
       setAnimalData(formattedData);
     });
