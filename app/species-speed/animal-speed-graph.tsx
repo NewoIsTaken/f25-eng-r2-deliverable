@@ -26,8 +26,8 @@ export default function AnimalSpeedGraph() {
     d3.csv("/sample_animals.csv").then((rawData) => {
       // Transform the raw data to fit the AnimalDatum interface
       const formattedData = rawData.map((animal) => ({
-        name: animal.Animal,
-        diet: animal.Diet,
+        name: animal.Animal || "",
+        diet: animal.Diet || "",
         speed: parseFloat(animal["Average Speed (km/h)"] || ""),
       }));
       setAnimalData(formattedData);
@@ -96,7 +96,7 @@ export default function AnimalSpeedGraph() {
       .enter()
       .append("rect")
       .attr("x", function (d) {
-        return x(d.name);
+        return x(d.name) || "";
       })
       .attr("y", function (d) {
         return y(d.speed);
