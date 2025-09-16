@@ -112,20 +112,20 @@ export default function AnimalSpeedGraph() {
         return "#a51c30"; // Default color if diet is unknown
       });
 
-    svg
-      .append("text")
-      .attr("transform", "translate(" + width / 2 + " ," + (height + margin.bottom) + ")")
-      .style("text-anchor", "middle")
-      .text("Animal Names");
+    // svg
+    //   .append("text")
+    //   .attr("transform", "translate(" + width / 2 + " ," + (height + margin.bottom) + ")")
+    //   .style("text-anchor", "middle")
+    //   .text("Animal Names");
 
-    // Add Y-axis label
-    svg
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0)
-      .attr("x", -(height / 2))
-      .style("text-anchor", "middle")
-      .text("Average Speed (km/h)");
+    // // Add Y-axis label
+    // svg
+    //   .append("text")
+    //   .attr("transform", "rotate(-90)")
+    //   .attr("y", 0)
+    //   .attr("x", -(height / 2))
+    //   .style("text-anchor", "middle")
+    //   .text("Average Speed (km/h)");
   }, [animalData]);
 
   // TODO: Return the graph
