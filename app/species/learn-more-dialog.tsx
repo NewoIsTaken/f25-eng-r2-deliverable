@@ -81,13 +81,6 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
     const { error } = await supabase
       .from("species")
       .update({
-        author: userId,
-        common_name: species.common_name,
-        description: species.description,
-        kingdom: species.kingdom,
-        scientific_name: species.scientific_name,
-        total_population: species.total_population,
-        image: species.image,
         comment_list: comments,
       })
       .eq("id", species.id);
@@ -123,13 +116,6 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
     const { error } = await supabase
       .from("species")
       .update({
-        author: userId,
-        common_name: species.common_name,
-        description: species.description,
-        kingdom: species.kingdom,
-        scientific_name: species.scientific_name,
-        total_population: species.total_population,
-        image: species.image,
         comment_list: comments,
       })
       .eq("id", species.id);
