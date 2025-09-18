@@ -38,7 +38,7 @@ const defaultValues: Partial<FormData> = {
 };
 
 export default function LearnMoreDialog({ userId, species, user }: { userId: string; species: Species, user: string; }) {
-  const comments = species.comment_list;
+  const comments = species.comment_list!;
 
   const router = useRouter();
   // Control open/closed state of the dialog
