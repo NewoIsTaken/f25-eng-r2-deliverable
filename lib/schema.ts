@@ -1,5 +1,6 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type Database = {
   graphql_public: {
     Tables: {
@@ -221,6 +222,7 @@ export type Enums<
     : never;
 
 export type CompositeTypes<
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"] | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
     schema: keyof Database;
