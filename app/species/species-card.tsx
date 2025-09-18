@@ -17,7 +17,7 @@ import LearnMoreDialog from "./learn-more-dialog";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
-export default function SpeciesCard({ session, species }: { session: string; species: Species }) {
+export default function SpeciesCard({ session, species, user }: { session: string; species: Species, user: string; }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
       {species.image && (
@@ -28,7 +28,7 @@ export default function SpeciesCard({ session, species }: { session: string; spe
       <h3 className="mt-3 text-2xl font-semibold">{species.scientific_name}</h3>
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
-      <LearnMoreDialog species={species}></LearnMoreDialog>
+      <LearnMoreDialog userId={session} species={species} user={user}></LearnMoreDialog>
       {species.author == session && <EditSpeciesDialog userId={session} species={species}></EditSpeciesDialog>}
     </div>
   );
