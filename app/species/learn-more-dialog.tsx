@@ -201,16 +201,16 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
         </Form>
 
         <div>
-          {comments.map((comment, index) => (
+          {Array.isArray(comments) && comments ? comments.map((comment, index) => (
             <div key={index} className="mt-2 flex">
               <Comment key={index} comment={comment}></Comment>
-              {comment.author == userId && (
+              {comment && comment.author == userId && (
                 <Button key={index} className="ml-1 mr-1" onClick={() => deleteComment(index)}>
                   Delete
                 </Button>
               )}
             </div>
-          ))}
+          )) : "Comments are not in the right format!"}
         </div>
       </DialogContent>
     </Dialog>
