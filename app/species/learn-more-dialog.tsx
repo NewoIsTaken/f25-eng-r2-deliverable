@@ -158,7 +158,7 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
         <p>Kingdom: {species.kingdom}</p>
         <p>Total Population: {species.total_population}</p>
         <p>Description: {species.description}</p>
-        <h3>Comments</h3>
+        <h3 className="mt-3">Comments</h3>
         <Form {...form}>
           <form onSubmit={(e: BaseSyntheticEvent) => void form.handleSubmit(onSubmit)(e)}>
             <div className="flex w-full items-center gap-4">
