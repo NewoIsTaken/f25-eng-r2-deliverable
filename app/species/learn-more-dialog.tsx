@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 "use client";
 
@@ -206,6 +207,7 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
             <div key={index} className="mt-2 flex">
               <Comment key={index} comment={comment}></Comment>
               {comment && comment.author == userId && (
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
                 <Button key={index} className="ml-1 mr-1" onClick={() => deleteComment(index)}>
                   Delete
                 </Button>
