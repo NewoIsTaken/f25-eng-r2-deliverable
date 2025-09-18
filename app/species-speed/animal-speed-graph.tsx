@@ -58,7 +58,13 @@ export default function AnimalSpeedGraph() {
 
     // Create the SVG element where D3 will draw the chart
     // https://github.com/d3/d3-selection
-    const svg = d3.select(graphRef.current!).append<SVGSVGElement>("svg").attr("width", width + 50).attr("height", height + 100);
+    const svg = d3
+      .select(graphRef.current!)
+      .append<SVGSVGElement>("svg")
+      .attr("width", width + 50)
+      .attr("height", height + 100)
+      .attr("overflow", "visible")
+      .attr("style", "margin-left: 10px;");
 
     // TODO: Implement the rest of the graph
     // HINT: Look up the documentation at these links
@@ -112,20 +118,51 @@ export default function AnimalSpeedGraph() {
         return "#a51c30"; // Default color if diet is unknown
       });
 
-    // svg
-    //   .append("text")
-    //   .attr("transform", "translate(" + width / 2 + " ," + (height + margin.bottom) + ")")
-    //   .style("text-anchor", "middle")
-    //   .text("Animal Names");
+    svg
+      .append("text")
+      .attr("transform", "translate(" + width / 2 + " ," + (height + margin.bottom + 10) + ")")
+      .style("text-anchor", "middle")
+      .style("fill", "hsl(var(--foreground))")
+      .text("Animal Names");
 
-    // // Add Y-axis label
-    // svg
-    //   .append("text")
-    //   .attr("transform", "rotate(-90)")
-    //   .attr("y", 0)
-    //   .attr("x", -(height / 2))
-    //   .style("text-anchor", "middle")
-    //   .text("Average Speed (km/h)");
+    // Add Y-axis label
+    svg
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -30)
+      .attr("x", -(height / 2))
+      .style("text-anchor", "middle")
+      .style("fill", "hsl(var(--foreground))")
+      .text("Average Speed (km/h)");
+
+    svg.append("circle").attr("cx", width - 160).attr("cy", 10).attr("r", 6).style("fill", "red");
+    svg.append("circle").attr("cx", width - 160).attr("cy", 40).attr("r", 6).style("fill", "green");
+        svg.append("circle").attr("cx", width - 160).attr("cy", 70).attr("r", 6).style("fill", "brown");
+
+    svg
+      .append("text")
+      .attr("x", width - 150)
+      .attr("y", 15)
+      .text("Carnivore")
+      .style("font-size", "15px")
+      .style("fill", "hsl(var(--foreground))")
+      .attr("alignment-baseline", "middle");
+    svg
+      .append("text")
+      .attr("x", width - 150)
+      .attr("y", 45)
+      .text("Herbivore")
+      .style("font-size", "15px")
+      .style("fill", "hsl(var(--foreground))")
+      .attr("alignment-baseline", "middle");
+      svg
+      .append("text")
+      .attr("x", width - 150)
+      .attr("y", 75)
+      .text("Omnivore")
+      .style("font-size", "15px")
+      .style("fill", "hsl(var(--foreground))")
+      .attr("alignment-baseline", "middle");
   }, [animalData]);
 
   // TODO: Return the graph
