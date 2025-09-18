@@ -37,7 +37,7 @@ const defaultValues: Partial<FormData> = {
   comment_body: "",
 };
 
-export default function LearnMoreDialog({ userId, species, user }: { userId: string; species: Species, user: string; }) {
+export default function LearnMoreDialog({ userId, species, user }: { userId: string; species: Species; user: string }) {
   const comments = species.comment_list!;
 
   const router = useRouter();
@@ -50,8 +50,6 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
     mode: "onChange",
   });
   const supabase = createBrowserSupabaseClient();
-
-
 
   // async function getDisplayName (user: string) {
   //   const { data, error } = await supabase
@@ -71,8 +69,12 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
   //   return data[0]?.display_name;
   // }
 
-  async function deleteComment (index: number) {
-    comments.splice(index, 1);
+  async function deleteComment(index: number) {
+    if (Array.isArray(comments)) {
+      comments.splice(index, 1);
+    } else {
+      throw "Expected comments to be an array!";
+    }
 
     const { error } = await supabase
       .from("species")
@@ -105,12 +107,16 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
   }
 
   const onSubmit = async (input: FormData) => {
-    comments.unshift({
-      author: userId,
-      user: user,
-      timestamp: Date.now(),
-      comment_body: input.comment_body,
-    });
+    if (Array.isArray(comments)) {
+      comments.unshift({
+        author: userId,
+        user: user,
+        timestamp: Date.now(),
+        comment_body: input.comment_body,
+      });
+    } else {
+      throw "Expected comments to be an array!";
+    }
     // The `input` prop contains data that has already been processed by zod. We can now use it in a supabase query
     const { error } = await supabase
       .from("species")
@@ -196,9 +202,13 @@ export default function LearnMoreDialog({ userId, species, user }: { userId: str
 
         <div>
           {comments.map((comment, index) => (
-            <div key={index} className="flex mt-2">
-              <Comment key={index} comment={comment} ></Comment>
-              {comment.author == userId && <Button key={index} className="ml-1 mr-1" onClick={() => deleteComment(index)}>Delete</Button>}
+            <div key={index} className="mt-2 flex">
+              <Comment key={index} comment={comment}></Comment>
+              {comment.author == userId && (
+                <Button key={index} className="ml-1 mr-1" onClick={() => deleteComment(index)}>
+                  Delete
+                </Button>
+              )}
             </div>
           ))}
         </div>
